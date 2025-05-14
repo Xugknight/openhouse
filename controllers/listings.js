@@ -28,7 +28,7 @@ router.get('/new', ensureLoggedIn, (req, res) => {
 
 // Create action
 // POST /listings
-router.post('/', async (req, res) => { // async because we're creating data
+router.post('/', ensureLoggedIn, async (req, res) => { // async because we're creating data
   try {
     // Be sure to add the owner's/user's ObjectId (_id)
     req.body.owner = req.user._id;
@@ -36,14 +36,14 @@ router.post('/', async (req, res) => { // async because we're creating data
     res.redirect('/listings');
   } catch (err) {
     console.log(err); // Log error for dev to see, user will not see.
-    res.redirect('/listings/new'); // Redirect to new.ejs to show the "Create" was not successful
+    res.redirect('listings/new'); // Redirect to new.ejs to show the "Create" was not successful
   }
 });
 
 // Show action
 // Get /listings/:id
 router.get('/:id', async (req, res) => { // async, will have to retrieve data
-  const listing = await Listing.findById(req.params.id);
+  const listing = await Listing.findById(req.params.id).populate('owner');
   res.render('listings/show.ejs', { listing });
 });
 
