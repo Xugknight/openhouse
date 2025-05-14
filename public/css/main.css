@@ -10,6 +10,23 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
+button:has(i) {
+  border: transparent;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover {
+    border: transparent;
+    background-color: transparent;
+    color: black;
+  }
+}
+
+button>i {
+  font-size: 2rem;
+}
+
 nav,
 footer {
   background-color: lightblue;

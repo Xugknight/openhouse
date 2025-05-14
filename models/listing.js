@@ -18,6 +18,10 @@ const listingSchema = new Schema({
         // It's a good practice to use th erequired option to prevent
         // orphaned documents, i.e., a listing without an owner (parent).
         required: true
+    },
+    favoritedBy: {
+        type: [Schema.Types.ObjectId],
+        ref: 'User'
     }
 }, {
     // Mongoose will create and maintain createdAt & updatedAt properties.

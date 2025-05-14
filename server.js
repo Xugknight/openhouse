@@ -57,7 +57,9 @@ app.use('/auth', require('./controllers/auth'));
 
 // Update the data resource with your "main" resource
 app.use('/listings', require('./controllers/listings'));
-
+// Because favorites is a related resource, the "starts with" path
+// varies, therefore, we need to mount to '/'
+app.use('/', require('./controllers/favorites'));
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

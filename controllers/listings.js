@@ -44,7 +44,8 @@ router.post('/', ensureLoggedIn, async (req, res) => { // async because we're cr
 // Get /listings/:id
 router.get('/:id', async (req, res) => { // async, will have to retrieve data
   const listing = await Listing.findById(req.params.id).populate('owner');
-  res.render('listings/show.ejs', { listing });
+  const isFavored = listing.favoritedBy.some((id) => id.equals(req.user?._id));
+  res.render('listings/show.ejs', { listing, isFavored });
 });
 
 module.exports = router;
