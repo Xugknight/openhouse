@@ -14,7 +14,7 @@ const ensureLoggedIn = require('../middleware/ensure-logged-in');
 // GET /favorites
 router.get('/favorites', ensureLoggedIn, async (req, res) => {
   const listings = await Listing.find({ favoritedBy: req.user._id }).sort('-createdAt');
-  res.render('listings/index.ejs', { listings });
+  res.render('listings/index.ejs', { listings, title: 'Favorites Listings' });
 });
 
 // New action

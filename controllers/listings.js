@@ -16,7 +16,7 @@ const ensureLoggedIn = require('../middleware/ensure-logged-in');
 router.get('/', async (req, res) => {
   // Thanks to the timestamps option, we can sort by createdAt
   const listings = await Listing.find({}).sort('-createdAt');
-  res.render('listings/index.ejs', { listings }); // Did not change data so we use render() instead of redirect()
+  res.render('listings/index.ejs', { listings, title: 'All Listings' }); // Did not change data so we use render() instead of redirect()
 });
 
 // New action

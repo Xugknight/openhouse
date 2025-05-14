@@ -1,6 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const viewingSchema = new Schema({
+    when: {
+        type: Date,
+        required: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
+}, {
+    timestamps: true,
+})
+
 const listingSchema = new Schema({
     address: {
         type: String,
