@@ -10,13 +10,11 @@ const ensureLoggedIn = require('../middleware/ensure-logged-in');
 
 // ALL paths start with '/'
 
-// Index action
-// GET /listings
-// Non-protected route
-router.get('/', async (req, res) => {
-  // Thanks to the timestamps option, we can sort by createdAt
-  const listings = await Listing.find({}).sort('-createdAt');
-  res.render('listings/index.ejs', { listings }); // Did not change data so we use render() instead of redirect()
+// Index action (view user's favorited listings)
+// GET /favorites
+router.get('/favorites', ensureLoggedIn, async (req, res) => {
+  const listings = await Listing.find({ favoritedBy: req.user._id }).sort('-createdAt');
+  res.render('listings/index.ejs', { listings });
 });
 
 // New action

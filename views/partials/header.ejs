@@ -14,6 +14,7 @@
       <a href="/listings">ALL LISTINGS</a>
       <!-- All links above are available to BOTH visitors & users -->
       <% if (user) { %>
+        <a href="/favorites">FAVORITE LISTINGS</a>
         <a href="/listings/new">ADD LISTING</a>
         <a href="/auth/sign-out">SIGN OUT</a>
         <span><%= user.name %></span>
