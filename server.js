@@ -60,6 +60,8 @@ app.use('/listings', require('./controllers/listings'));
 // Because favorites is a related resource, the "starts with" path
 // varies, therefore, we need to mount to '/'
 app.use('/', require('./controllers/favorites'));
+// Viewings controller
+app.use('/', require('./controllers/viewings'));
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

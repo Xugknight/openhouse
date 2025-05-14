@@ -27,6 +27,10 @@ button>i {
   font-size: 2rem;
 }
 
+p {
+  text-align: center;
+}
+
 nav,
 footer {
   background-color: lightblue;
@@ -62,6 +66,7 @@ main {
   flex-direction: column;
   align-items: center;
   margin-top: 5vmin;
+  overflow-y: auto;
 }
 
 form {
@@ -93,4 +98,10 @@ button:hover {
 
 .error-msg {
   color: rgb(223, 116, 116);
+}
+
+#show-page {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
 }

@@ -8,7 +8,8 @@ const viewingSchema = new Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     }
 }, {
     timestamps: true,
@@ -35,7 +36,8 @@ const listingSchema = new Schema({
     favoritedBy: {
         type: [Schema.Types.ObjectId],
         ref: 'User'
-    }
+    },
+    viewings: [viewingSchema]
 }, {
     // Mongoose will create and maintain createdAt & updatedAt properties.
     timestamps: true,

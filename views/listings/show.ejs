@@ -2,19 +2,43 @@
 
 <h1>Listing Detail</h1>
 
-<p><strong><%= listing.address %></strong></p>
-<p>Owner: <%= listing.owner.name %></p>
-<p>Listed On: <%= listing.createdAt.toLocaleDateString() %></p>
-<p>
-    <% if (isFavored) { %>
-            <form action="/listings/<%= listing._id %>/favorites?_method=DELETE" method="POST">
-                <button type="submit"><i class="bi bi-heart-fill"></i></button>
+<section id="show-page">
+
+    <article>
+        <p><strong><%= listing.address %></strong></p>
+        <p>Owner: <%= listing.owner.name %></p>
+        <p>Listed On: <%= listing.createdAt.toLocaleDateString() %></p>
+        <p>
+            <% if (isFavored) { %>
+                    <form action="/listings/<%= listing._id %>/favorites?_method=DELETE" method="POST">
+                        <button type="submit"><i class="bi bi-heart-fill"></i></button>
+                    </form>
+            <% } else if (user) { %>
+                    <form action="/listings/<%= listing._id %>/favorites" method="POST">
+                        <button type="submit"><i class="bi bi-heart"></i></button>
+                    </form>
+            <% } %>
+        </p>
+    </article>
+    <% if (user) { %>
+        <article>
+            <p><strong>Viewings</strong></p>
+            <form action="/listings/<%= listing._id %>/viewings" method="POST">
+                <label for="when">Date & Time</label>
+                <input type="datetime-local" id="when" name="when"> 
+                <button type="submit">ADD VIEWING</button>
             </form>
-    <% } else if (user) { %>
-            <form action="/listings/<%= listing._id %>/favorites" method="POST">
-                <button type="submit"><i class="bi bi-heart"></i></button>
-            </form>
+            <ul>
+                <% listing.viewings.forEach((viewing) => { %>
+                    <li>
+                        <%= viewing.when.toLocaleString() %>
+                        <br>
+                        (<%= viewing.user.name %>)
+                    </li>
+                <% }); %>
+            </ul>
+        </article>
     <% } %>
-</p>
+</section>
 
 <%- include('../partials/footer.ejs')  %>
