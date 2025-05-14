@@ -1,0 +1,19 @@
+<%- include('../partials/header.ejs')  %>
+
+<h1>All Listings</h1>
+
+<% if (listings.length) { %>
+    <ul>
+        <% listings.forEach((listing) => { %>
+            <li>
+                <a href="/listing/<%= listing._id %>">
+                    <%= listing.address %>
+                </a>
+            </li>
+        <% }); %>
+    </ul>    
+<% } else { %>
+    <p>There Are No Listings Yet</p>
+<% } %>
+
+<%- include('../partials/footer.ejs')  %>
