@@ -10,8 +10,8 @@ const listingSchema = new Schema({
         // Referencing ALWAYS uses an ObjectId to reference
         // the related document
         type: Schema.Types.ObjectId,
-        // The ref specifies the collection/model that the ObjectId
-        // is from.
+        // The ref specifies the collection/model that the 
+        // ObjectId (_id property) is from.
         // The ref option is what enables the .populate() method to
         // replace the ObjectId with the actual document that it references
         ref: 'User',

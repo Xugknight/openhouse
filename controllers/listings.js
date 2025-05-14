@@ -25,7 +25,18 @@ router.get('/new', ensureLoggedIn, (req, res) => {
   res.render('listings/new.ejs');
 });
 
-
-
+// Create action
+// POST /listings
+router.post('/', async (req, res) => { // async because we're creating data
+  try {
+    // Be sure to add the owner's/user's ObjectId (_id)
+    req.body.owner = req.user._id;
+    await Listing.create(req.body);
+    res.redirect('/listings');
+  } catch (err) {
+    console.log(err); // Log error for dev to see, user will not see.
+    res.redirect('/listings/new'); // Redirect to new.ejs to show the "Create" was not successful
+  }
+});
 
 module.exports = router;
