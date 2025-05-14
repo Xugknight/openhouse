@@ -14,7 +14,8 @@ const ensureLoggedIn = require('../middleware/ensure-logged-in');
 // GET /listings
 // Non-protected route
 router.get('/', async (req, res) => {
-  const listings = await Listing.find({});
+  // Thanks to the timestamps option, we can sort by createdAt
+  const listings = await Listing.find({}).sort('-createdAt');
   res.render('listings/index.ejs', { listings }); // Did not change data so we use render() instead of redirect()
 });
 
@@ -37,6 +38,13 @@ router.post('/', async (req, res) => { // async because we're creating data
     console.log(err); // Log error for dev to see, user will not see.
     res.redirect('/listings/new'); // Redirect to new.ejs to show the "Create" was not successful
   }
+});
+
+// Show action
+// Get /listings/:id
+router.get('/:id', async (req, res) => { // async, will have to retrieve data
+  const listing = await Listing.findById(req.params.id);
+  res.render('listings/show.ejs', { listing });
 });
 
 module.exports = router;
